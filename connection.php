@@ -1,13 +1,13 @@
-<?php 
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $db = "hms";
-    $con = mysqli_connect($host, $user, $pass, $db);
+<?php $env = parse_ini_file(__DIR__ . "env");
 
-    if($con){
-        // echo "connected with database successfully";
-    }else{
-        echo"Not Connected successfully";
-    }
-?>
+$host = $env["HOSTNAME"];
+$user = $env['USER'];
+$pass = $env['PASS'];
+$db   = $env['DB'];
+$con = mysqli_connect($host, $user, $pass, $db);
+
+if (!$con) {
+    die("Database connection failed: " . mysqli_connect_error());
+}else{
+    echo "Databse Connected";
+}
